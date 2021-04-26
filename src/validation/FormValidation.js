@@ -1,4 +1,4 @@
-import Schema from 'async-validator'
+import Schema from '../../node_modules/async-validator/dist-web/index.js'
 
 const ruleDefinitions = []
 
@@ -13,7 +13,8 @@ const messageErrorClass = 'field-validation-error'
 
 
 export const addRule = function(rule) {
-  ruleDefinitions.add(rule)
+  ruleDefinitions.push(rule)
+  document.dispatchEvent(new CustomEvent('form-updated'))
 }
 
 export class FormValidation {

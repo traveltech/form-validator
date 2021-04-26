@@ -1,0 +1,42 @@
+<html>
+  <head>
+  <style>
+    form {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    form > div {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      display: block;
+    }
+  </style>
+  </head>
+  <body>
+    <div>
+      <form action="#" method="get" novalidate >
+        <div>
+          <label for="firstname" >First name</label>
+          <input type="text" id="firstname" name="firstname" placeholder = "e.g. John" data-val="true" data-val-required="this field is required"/>
+          <span data-valmsg-for="firstname" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+          <label for="lastname" >First name</label>
+          <input type="text" id="lastname" name="lastname" placeholder = "e.g. Jones" data-val="true" data-val-required="this field is required"/>
+          <span data-valmsg-for="lastname" data-valmsg-replace="true"></span>
+        </div>
+        <div>
+          <label for="email" >First name</label>
+          <input type="email" id="email" name="email" placeholder = "e.g. bob@icloud.com" data-val="true" data-val-email="a valid email address is requried" data-val-required="this field is required"/>
+          <span data-valmsg-for="email" data-valmsg-replace="true"></span>
+        </div>
+        <button type="Submit">Submit</button>
+      </form>
+    </div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

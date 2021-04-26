@@ -1,9 +1,16 @@
-import { addRule, FormValidation } from './validation/FormValidation'
-import { initForm, initForms } from './validation/init'
+import { initForms } from './validation/init.js'
+import { addRule } from './validation/FormValidation.js'
 
 //rules
-import required from  './validation-rules/required'
+import requiredRule from  './validation-rules/required.js'
+import emailRule from  './validation-rules/email.js'
 
-addRule(required)
+requiredRule()
+emailRule()
 
 initForms()
+
+export {
+  initForms,
+  addRule
+}
