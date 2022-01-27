@@ -1,4 +1,5 @@
-import Schema from '../../node_modules/async-validator/dist-web/index.js'
+import Schema from 'async-validator'
+import { submitAjaxForm } from './submitAjaxForm'
 
 const ruleDefinitions = []
 
@@ -11,10 +12,14 @@ const summaryErrorClass = 'validation-summary-errors'
 const messageValidClass = 'field-validation-valid'
 const messageErrorClass = 'field-validation-error'
 
+export const updatedEvent = 'form-updated'
 
-export const addRule = function(rule) {
-  ruleDefinitions.push(rule)
-  document.dispatchEvent(new CustomEvent('form-updated'))
+
+export const addRule = function(attribute, rule) {
+  ruleDefinitions.push({
+    attribute = attribute,
+    rule: rule})
+  document.dispatchEvent(new CustomEvent(updatedEvent))
 }
 
 export class FormValidation {
@@ -25,13 +30,11 @@ export class FormValidation {
   }
 
   setUpEvents () {
-    var _this = this
-
-    if (!this.form.dataset.ajax) {
-      this.form.addEventListener('submit',(e) => {
+     if (!this.form.dataset.ajax) {
+      this.form.addEventListener('submit', (e) => {
         if (!this.form.dataset.valid) {
           e.preventDefault()
-          this.validateForm().then(function () {
+          this.validateForm().then(() => {
             this.form.dataset.valid = true
             this.form.submit()
           }).catch(function (errors, fields) {
@@ -39,23 +42,41 @@ export class FormValidation {
           })
         }
       })
-    }
+    } else if (this.form.dataset.ajax === 'auto') {
+      this.form.addEventListener('submit', (e) => {
+        if (!this.form.dataset.valid) {
+          e.preventDefault()
 
-    for (const field of this.fields) {
-      field.addEventListener('blur', function () {
-        try {
-          this.validateField(field)
-        } catch (err) {
-        }
-      })
-
-      field.addEventListener('change', function () {
-        try {
-          this.validateField(field)
-        } catch (err) {
+          this.validateForm().then(() => {
+            this.form.dataset.valid = true
+            submitAjaxForm(this.form)
+          }).catch(function (errors, fields) {
+            e.preventDefault()
+          })
         }
       })
     }
+
+    this.form.addEventListener('blur', (e) => {
+      try {
+        this.validateField(e.target)
+      } catch (err) {
+      }
+    })
+
+    this.form.addEventListener('input', (e) => {
+      try {
+        this.validateField(e.target)
+      } catch (err) {
+      }
+    })
+
+    this.form.addEventListener('change', (e) => {
+      try {
+        this.validateField(e.target)
+      } catch (err) {
+      }
+    })
   }
 
   initRules () {
@@ -71,7 +92,12 @@ export class FormValidation {
   setupRules (field) {
     const rules = []
     for (const rule of ruleDefinitions) {
-      rule(field, rules)
+      if (field.dataset[rule.attribute]){
+        var newRule = rule.rule(field)
+        if (newRule) {
+          rules.push(newRule)
+        }
+      }
     }
 
     if (rules.length > 0 & field.name.length > 0) {
