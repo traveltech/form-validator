@@ -16,9 +16,7 @@ export const updatedEvent = 'form-updated'
 
 
 export const addRule = function(attribute, rule) {
-  ruleDefinitions.push({
-    attribute = attribute,
-    rule: rule})
+  ruleDefinitions.push({ attribute, rule })
   document.dispatchEvent(new CustomEvent(updatedEvent))
 }
 
@@ -30,6 +28,7 @@ export class FormValidation {
   }
 
   setUpEvents () {
+    this.form.noValidate = true;
      if (!this.form.dataset.ajax) {
       this.form.addEventListener('submit', (e) => {
         if (!this.form.dataset.valid) {
@@ -93,7 +92,7 @@ export class FormValidation {
     const rules = []
     for (const rule of ruleDefinitions) {
       if (field.dataset[rule.attribute]){
-        var newRule = rule.rule(field)
+        const newRule = rule.rule(field)
         if (newRule) {
           rules.push(newRule)
         }
@@ -106,7 +105,7 @@ export class FormValidation {
   }
 
   handleErrors (errors, fields) {
-    for (var key in fields) {
+    for (const key in fields) {
       const field = fields[key]
       this.displayError(field[0])
     }
@@ -123,7 +122,7 @@ export class FormValidation {
   }
 
   clearPreviousErrors () {
-    var errors = this.form.querySelectorAll(`.${inputErrorClass}`)
+    const errors = this.form.querySelectorAll(`.${inputErrorClass}`)
     for (const error of errors) {
       error.classList.remove(inputErrorClass)
     }
@@ -136,18 +135,24 @@ export class FormValidation {
       }
     }
 
-    var messages = this.form.querySelectorAll(`.${messageErrorClass}`)
+    const messages = this.form.querySelectorAll(`.${messageErrorClass}`)
 
     for (const message of messages) {
       message.classList.remove(messageErrorClass)
       message.classList.add(messageValidClass)
       message.innerText = ''
     }
+
+    if (this.summary) {
+      const list = this.summary.firstChild
+      list.innerHTML = ''
+    }
   }
 
   validationSummary (errors) {
     if (this.summary) {
       const list = this.summary.firstChild
+      list.innerHTML = ''
       for (let i = 0; i < errors.length; i++) {
         const error = errors[i]
         const li = document.createElement('li')
@@ -161,12 +166,12 @@ export class FormValidation {
   }
 
   displayError (field) {
-    var elem = this.form.querySelector(`[name="${field.field}"]`)
+    const elem = this.form.querySelector(`[name="${field.field}"]`)
 
     if (elem) {
       elem.classList.add(inputErrorClass)
 
-      var label = this.form.querySelector(`[data-valmsg-for="${field.field}"]`)
+      const label = this.form.querySelector(`[data-valmsg-for="${field.field}"]`)
 
       if (label && label.dataset.valmsgReplace === 'true') {
         label.innerText = field.message
@@ -197,7 +202,7 @@ export class FormValidation {
       field.classList.add(inputValidClass)
     }
 
-    var label = this.form.querySelector(`[data-valmsg-for="${field.name}"]`)
+    const label = this.form.querySelector(`[data-valmsg-for="${field.name}"]`)
 
     if (label && label.dataset.valmsgReplace === 'true') {
       label.innerText = ''
@@ -210,7 +215,7 @@ export class FormValidation {
     }
 
     if (this.summary) {
-      var err = this.summary.querySelector(`data-error-for="${field.name}"`)
+      const err = this.summary.querySelector(`[data-error-for="${field.name}"]`)
       if (err) {
         err.parentNode.removeChild(err)
       }
@@ -229,7 +234,7 @@ export class FormValidation {
   }
 
   formToObject () {
-    var formData = new FormData(this.form)
+    const formData = new FormData(this.form)
     let object = {}
     formData.forEach((value, key) => {
       if (key === '') {
