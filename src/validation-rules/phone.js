@@ -3,7 +3,7 @@ export default function () {
   addRule('valPhone', function (field) {
     return {
       type: 'string',
-      pattern: new RegExp(`[0-9]+`),
+      pattern: /[0-9]+/,
       message: field.dataset.valPhone
     }
   })
