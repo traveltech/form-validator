@@ -26,6 +26,5 @@ export default function () {
       required: true,
       message: field.dataset.valRequired
     }
-
   })
 }
