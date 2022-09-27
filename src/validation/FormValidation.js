@@ -14,8 +14,7 @@ const messageErrorClass = 'field-validation-error'
 
 export const updatedEvent = 'form-updated'
 
-
-export const addRule = function(attribute, rule) {
+export const addRule = function (attribute, rule) {
   ruleDefinitions.push({ attribute, rule })
   document.dispatchEvent(new CustomEvent(updatedEvent))
 }
@@ -28,8 +27,8 @@ export class FormValidation {
   }
 
   setUpEvents () {
-    this.form.noValidate = true;
-     if (!this.form.dataset.ajax) {
+    this.form.noValidate = true
+    if (!this.form.dataset.ajax) {
       this.form.addEventListener('submit', (e) => {
         if (!this.form.dataset.valid) {
           e.preventDefault()
@@ -79,8 +78,7 @@ export class FormValidation {
   }
 
   initRules () {
-
-    let definition = {}
+    const definition = {}
     for (const field of this.fields) {
       definition[field.name] = this.setupRules(field)
     }
@@ -91,7 +89,7 @@ export class FormValidation {
   setupRules (field) {
     const rules = []
     for (const rule of ruleDefinitions) {
-      if (field.dataset[rule.attribute]){
+      if (field.dataset[rule.attribute]) {
         const newRule = rule.rule(field)
         if (newRule) {
           rules.push(newRule)
@@ -113,7 +111,7 @@ export class FormValidation {
   }
 
   handleFieldError (errors, fields, field) {
-    if (fields.hasOwnProperty(field.name)) {
+    if (Object.hasOwn(fields, field.name)) {
       const err = fields[field.name]
       this.displayError(err[0])
     } else {
@@ -235,7 +233,7 @@ export class FormValidation {
 
   formToObject () {
     const formData = new FormData(this.form)
-    let object = {}
+    const object = {}
     formData.forEach((value, key) => {
       if (key === '') {
         return

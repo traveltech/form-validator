@@ -2,7 +2,6 @@
 const ie11 = typeof (document.documentMode) !== 'undefined'
 
 const parseHTML = function (str) {
-  logger.log('parsing response html')
   const tmp = document.implementation.createHTMLDocument()
   tmp.body.innerHTML = str
   return tmp.body.children
@@ -11,17 +10,16 @@ const parseHTML = function (str) {
 const updateContents = function (mode, cssElem, content) {
   const elem = document.querySelector(cssElem)
   const lowerMode = mode.toLowerCase()
+  const html = parseHTML(content)
   switch (lowerMode) {
     case 'before':
-      const html = parseHTML(content)
       for (const content of html.length) {
         elem.insertBefore(content, elem.firstChild)
       }
       break
 
     case 'after':
-      var html2 = parseHTML(content)
-      for (const content of html2.length) {
+      for (const content of html.length) {
         elem.appendChild(content)
       }
       break
@@ -54,7 +52,7 @@ export const submitAjaxForm = function (form) {
   const update = form.dataset.ajaxUpdate
   const formData = new FormData(form)
 
-  let fetchOptions = {
+  const fetchOptions = {
     method: form.method,
     credentials: 'same-origin',
     cache: 'no-cache',
@@ -76,6 +74,7 @@ export const submitAjaxForm = function (form) {
       updateContents(mode, update, data)
     })
     .catch(err => {
+      console.error(err)
       if (submit != null) {
         submit.disabled = false
       }
@@ -83,7 +82,7 @@ export const submitAjaxForm = function (form) {
 }
 
 const isElementInViewport = function (el) {
-  var rect = el.getBoundingClientRect()
+  const rect = el.getBoundingClientRect()
 
   return (
     rect.top >= 0 &&
