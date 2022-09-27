@@ -1,0 +1,14 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "loose": true,
+          "modules":  "auto",
+          "targets": {
+            "esmodules": true
+          }
+        }
+      ]
+    ]
+  }

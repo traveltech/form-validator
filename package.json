@@ -1,10 +1,10 @@
 {
-  "name": "form-validator",
-  "version": "1.0.0",
+  "name": "@chrisjwarnes/form-validator",
+  "version": "1.0.3",
   "description": "es6 replacement for jquery-unobtrusive-validation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d dist"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,12 @@
   },
   "homepage": "https://github.com/chrisjwarnes/form-validator#readme",
   "dependencies": {
-    "async-validator": "^3.5.1"
+    "async-validator": "^3.5.1",
+    "commander": "^9.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1"
   }
 }

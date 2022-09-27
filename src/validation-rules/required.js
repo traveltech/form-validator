@@ -1,6 +1,6 @@
 import { addRule } from '../validation/FormValidation.js'
 export default function () {
-  addRule('valRequired', function () {
+  addRule('valRequired', function (field) {
     if (field.type === 'checkbox') {
       return {
         type: 'boolean',

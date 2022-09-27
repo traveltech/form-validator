@@ -1,7 +1,5 @@
 import { FormValidation } from './FormValidation.js'
 
-let initialised = false
-
 export const initForm = function (form) {
   var val = new FormValidation(form)
 
