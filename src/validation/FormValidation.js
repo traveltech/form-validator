@@ -80,7 +80,10 @@ export class FormValidation {
   initRules () {
     const definition = {}
     for (const field of this.fields) {
-      definition[field.name] = this.setupRules(field)
+      const rules = this.setupRules(field)
+      if (rules) {
+        definition[field.name] = rules
+      }
     }
 
     this.validator = new Schema(definition)

@@ -1,0 +1,37 @@
+"use strict";
+
+exports.__esModule = true;
+
+var _init = require("./validation/init.js");
+
+exports.initForms = _init.initForms;
+
+var _FormValidation = require("./validation/FormValidation.js");
+
+exports.addRule = _FormValidation.addRule;
+
+var _required = _interopRequireDefault(require("./validation-rules/required.js"));
+
+var _email = _interopRequireDefault(require("./validation-rules/email.js"));
+
+var _maxLength = _interopRequireDefault(require("./validation-rules/maxLength.js"));
+
+var _minLength = _interopRequireDefault(require("./validation-rules/minLength.js"));
+
+var _number = _interopRequireDefault(require("./validation-rules/number.js"));
+
+var _phone = _interopRequireDefault(require("./validation-rules/phone.js"));
+
+var _regex = _interopRequireDefault(require("./validation-rules/regex.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// rules
+(0, _required.default)();
+(0, _email.default)();
+(0, _maxLength.default)();
+(0, _minLength.default)();
+(0, _number.default)();
+(0, _phone.default)();
+(0, _regex.default)();
+(0, _init.initForms)();
