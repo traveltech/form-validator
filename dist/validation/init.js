@@ -8,10 +8,16 @@ var _FormValidation = require("./FormValidation.js");
 var initForm = function initForm(form) {
   var val = new _FormValidation.FormValidation(form);
 
-  if (val.fields.length > 0) {
-    val.initRules();
-    val.setUpEvents();
-    form.validator = val;
+  if (form.validator) {
+    form.validator.init();
+  } else {
+    var _val = new _FormValidation.FormValidation(form);
+
+    if (_val.fields.length > 0) {
+      _val.setUpEvents();
+
+      form.validator = _val;
+    }
   }
 };
 

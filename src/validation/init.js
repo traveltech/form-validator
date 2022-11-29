@@ -1,13 +1,16 @@
 import { FormValidation } from './FormValidation.js'
 
 export const initForm = function (form) {
-  var val = new FormValidation(form)
+  if (form.validator) {
+    form.validator.init()
+  } else {
+    const val = new FormValidation(form)
 
-  if (val.fields.length > 0) {
-    val.initRules()
-    val.setUpEvents()
-
-    form.validator = val
+    if (val.fields.length > 0) {
+      val.setUpEvents()
+  
+      form.validator = val
+    }
   }
 }
 
@@ -19,7 +22,7 @@ export const initForms = function () {
   }
 
   document.addEventListener('form-updated', function (e) {
-    var forms = e.target.querySelectorAll('form')
+    const forms = e.target.querySelectorAll('form')
 
     for (const form of forms) {
       initForm(form)

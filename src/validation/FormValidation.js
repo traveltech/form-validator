@@ -22,8 +22,13 @@ export const addRule = function (attribute, rule) {
 export class FormValidation {
   constructor (form) {
     this.form = form
-    this.fields = form.querySelectorAll('[data-val="true"]')
+    this.init()
+  }
+
+  init () {
+    this.fields = this.form.querySelectorAll('[data-val="true"]')
     this.summary = this.form.querySelector('[data-valmsg-summary="true"]')
+    this.initRules()
   }
 
   setUpEvents () {
