@@ -45,7 +45,7 @@ export class FormValidation {
           })
         }
       })
-    } else if (this.form.dataset.ajax === 'auto') {
+    } else if (this.form.dataset.ajax === 'auto' || this.form.dataset.ajax === 'true') {
       this.form.addEventListener('submit', (e) => {
         if (!this.form.dataset.valid) {
           e.preventDefault()
