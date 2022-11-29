@@ -10,8 +10,9 @@ npm install '@chrisjwarnes/form-validator'
 ## basic usage
 
 ```
-import { initForms } from '@chrisjwarnes/form-validator'
+import { initForms, setupValidation } from '@chrisjwarnes/form-validator'
 
+setupValidation()
 initForms()
 
 ```

@@ -6,17 +6,14 @@ exports.initForms = exports.initForm = void 0;
 var _FormValidation = require("./FormValidation.js");
 
 var initForm = function initForm(form) {
-  var val = new _FormValidation.FormValidation(form);
-
   if (form.validator) {
     form.validator.init();
   } else {
-    var _val = new _FormValidation.FormValidation(form);
+    var val = new _FormValidation.FormValidation(form);
 
-    if (_val.fields.length > 0) {
-      _val.setUpEvents();
-
-      form.validator = _val;
+    if (val.fields.length > 0) {
+      val.setUpEvents();
+      form.validator = val;
     }
   }
 };

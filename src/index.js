@@ -10,17 +10,18 @@ import numberRule from './validation-rules/number.js'
 import phoneRule from './validation-rules/phone.js'
 import regexRule from './validation-rules/regex.js'
 
-requiredRule()
-emailRule()
-maxlengthRule()
-minlengthRule()
-numberRule()
-phoneRule()
-regexRule()
-
-initForms()
+const setupValidation = function() {
+  requiredRule()
+  emailRule()
+  maxlengthRule()
+  minlengthRule()
+  numberRule()
+  phoneRule()
+  regexRule()
+}
 
 export {
   initForms,
+  setupValidation,
   addRule
 }

@@ -1,6 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
+exports.setupValidation = void 0;
 
 var _init = require("./validation/init.js");
 
@@ -27,11 +28,14 @@ var _regex = _interopRequireDefault(require("./validation-rules/regex.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // rules
-(0, _required.default)();
-(0, _email.default)();
-(0, _maxLength.default)();
-(0, _minLength.default)();
-(0, _number.default)();
-(0, _phone.default)();
-(0, _regex.default)();
-(0, _init.initForms)();
+var setupValidation = function setupValidation() {
+  (0, _required.default)();
+  (0, _email.default)();
+  (0, _maxLength.default)();
+  (0, _minLength.default)();
+  (0, _number.default)();
+  (0, _phone.default)();
+  (0, _regex.default)();
+};
+
+exports.setupValidation = setupValidation;
