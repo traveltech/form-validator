@@ -53,6 +53,12 @@ var updateContents = function updateContents(mode, cssElem, content) {
   }));
 };
 
+var redirect = function redirect(responseData) {
+  if (responseData.redirectTo) {
+    window.location.href = responseData.redirectTo;
+  }
+};
+
 var submitAjaxForm = function submitAjaxForm(form) {
   var submit = form.querySelector('[type="submit"]');
 
@@ -72,14 +78,20 @@ var submitAjaxForm = function submitAjaxForm(form) {
       'X-Requested-With': 'XMLHttpRequest'
     }
   };
+  var responseJson = true;
   return fetch(form.action, fetchOptions).then(response => response.text()).then(data => {
     try {
       return JSON.parse(data);
     } catch (e) {
+      responseJson = false;
       return data;
     }
   }).then(data => {
-    updateContents(mode, update, data);
+    if (responseJson === true) {
+      redirect(data);
+    } else {
+      updateContents(mode, update, data);
+    }
   }).catch(err => {
     console.error(err);
 

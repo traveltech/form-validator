@@ -39,6 +39,12 @@ const updateContents = function (mode, cssElem, content) {
   elem.parentNode.dispatchEvent(new CustomEvent('form-updated', { bubbles: true }))
 }
 
+const redirect = function (responseData) {
+  if (responseData.redirectTo) {
+    window.location.href = responseData.redirectTo;
+  }
+}
+
 export const submitAjaxForm = function (form) {
   const submit = form.querySelector('[type="submit"]')
   if (submit != null) {
@@ -59,17 +65,23 @@ export const submitAjaxForm = function (form) {
     }
   }
 
+  let responseJson = true
   return fetch(form.action, fetchOptions)
     .then(response => response.text())
     .then(data => {
       try {
         return JSON.parse(data)
       } catch (e) {
+        responseJson = false
         return data
       }
     })
     .then(data => {
-      updateContents(mode, update, data)
+      if (responseJson === true) {
+        redirect(data);
+      } else {
+        updateContents(mode, update, data);
+      }
     })
     .catch(err => {
       console.error(err)
