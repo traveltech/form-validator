@@ -65,16 +65,14 @@ export const submitAjaxForm = function (form) {
     }
   }
 
-  let responseJson = true
+  let responseJson = false
   return fetch(form.action, fetchOptions)
-    .then(response => response.text())
-    .then(data => {
-      try {
-        return JSON.parse(data)
-      } catch (e) {
-        responseJson = false
-        return data
+    .then(response =>  {
+      if (response.headers.get('Content-Type').startsWith('application/json')) {
+        responseJson = true
+        return response.json()
       }
+      return response.text()
     })
     .then(data => {
       if (responseJson === true) {
@@ -84,7 +82,7 @@ export const submitAjaxForm = function (form) {
       }
     })
     .catch(err => {
-      console.error(err)
+      console.error('Ajax form submission error:', err)
       if (submit != null) {
         submit.disabled = false
       }
