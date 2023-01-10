@@ -1,6 +1,3 @@
-
-const ie11 = typeof (document.documentMode) !== 'undefined'
-
 const parseHTML = function (str) {
   const tmp = document.implementation.createHTMLDocument()
   tmp.body.innerHTML = str
@@ -33,7 +30,7 @@ const updateContents = function (mode, cssElem, content) {
       break
   }
 
-  if (!isElementInViewport(elem)) {
+  if (elem && !isElementInViewport(elem)) {
     window.setTimeout(() => {
       elem.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
     }, 200)
@@ -62,14 +59,15 @@ export const submitAjaxForm = function (form) {
     }
   }
 
-  if (ie11) {
-    const formParams = new URLSearchParams(formData)
-    fetchOptions.body = formParams
-    fetchOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-  }
-
   return fetch(form.action, fetchOptions)
     .then(response => response.text())
+    .then(data => {
+      try {
+        return JSON.parse(data)
+      } catch (e) {
+        return data
+      }
+    })
     .then(data => {
       updateContents(mode, update, data)
     })

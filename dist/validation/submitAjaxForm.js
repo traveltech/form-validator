@@ -2,7 +2,6 @@
 
 exports.__esModule = true;
 exports.submitAjaxForm = void 0;
-var ie11 = typeof document.documentMode !== 'undefined';
 
 var parseHTML = function parseHTML(str) {
   var tmp = document.implementation.createHTMLDocument();
@@ -39,7 +38,7 @@ var updateContents = function updateContents(mode, cssElem, content) {
       break;
   }
 
-  if (!isElementInViewport(elem)) {
+  if (elem && !isElementInViewport(elem)) {
     window.setTimeout(() => {
       elem.scrollIntoView({
         behavior: 'smooth',
@@ -73,14 +72,13 @@ var submitAjaxForm = function submitAjaxForm(form) {
       'X-Requested-With': 'XMLHttpRequest'
     }
   };
-
-  if (ie11) {
-    var formParams = new URLSearchParams(formData);
-    fetchOptions.body = formParams;
-    fetchOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-  }
-
   return fetch(form.action, fetchOptions).then(response => response.text()).then(data => {
+    try {
+      return JSON.parse(data);
+    } catch (e) {
+      return data;
+    }
+  }).then(data => {
     updateContents(mode, update, data);
   }).catch(err => {
     console.error(err);
