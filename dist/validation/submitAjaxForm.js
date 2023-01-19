@@ -78,14 +78,14 @@ var submitAjaxForm = function submitAjaxForm(form) {
       'X-Requested-With': 'XMLHttpRequest'
     }
   };
-  var responseJson = true;
-  return fetch(form.action, fetchOptions).then(response => response.text()).then(data => {
-    try {
-      return JSON.parse(data);
-    } catch (e) {
-      responseJson = false;
-      return data;
+  var responseJson = false;
+  return fetch(form.action, fetchOptions).then(response => {
+    if (response.headers.get('Content-Type').startsWith('application/json')) {
+      responseJson = true;
+      return response.json();
     }
+
+    return response.text();
   }).then(data => {
     if (responseJson === true) {
       redirect(data);
@@ -93,7 +93,7 @@ var submitAjaxForm = function submitAjaxForm(form) {
       updateContents(mode, update, data);
     }
   }).catch(err => {
-    console.error(err);
+    console.error('Ajax form submission error:', err);
 
     if (submit != null) {
       submit.disabled = false;

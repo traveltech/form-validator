@@ -32,7 +32,12 @@ function _default() {
     return {
       type: 'string',
       required: true,
-      message: field.dataset.valRequired
+      message: field.dataset.valRequired,
+
+      transform(value) {
+        return value.trim();
+      }
+
     };
   });
 }
