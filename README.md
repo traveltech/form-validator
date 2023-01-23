@@ -129,12 +129,12 @@ To make a form ajax use use the `data-ajax` attribute.
 
 If `data-ajax` is true or 'auto' then the library will look for the `data-ajax-update` and `data-ajax-mode` to decide the behavior.
 
-The `data-ajax-update` method is a css selector pointing to an individual element this will be used as a reference point for the response to the form submission.
+The `data-ajax-update` method is a css selector pointing to an individual element, this will be used as a reference point for the response to the form submission.
 
 The `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
 
 | **Ajax Method**    | **Behavior**                                                          |
-| -----------------  | --------------------------------------------------------------------  |
+| :----------------  | :-------------------------------------------------------------------  |
 | Before             | Insert the response from the server before the element                |
 | After              | Insert the response from the server after the element                 |
 | Replace-With       | replace the element with the response from the server                 |
