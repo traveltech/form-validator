@@ -7,13 +7,35 @@ npm install '@chrisjwarnes/form-validator'
 
 ```
 
-## basic usage
+## Basic usage
 
 ```javascript
 import { initForms, setupValidation } from '@chrisjwarnes/form-validator'
 
 setupValidation()
 initForms()
+
+```
+## Example html for form fields.
+
+### Required Field
+```html
+   <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" value="" data-val="true" data-val-required="There are errors in this field">
+      <span data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+
+```
+
+### Email (plus required)
+
+```html
+ <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" data-val="true" data-val-required="This field is required" data-val-email="The email address is invalid">
+    <span data-valmsg-for="email" data-valmsg-replace="true"></span>
+  </div>
 
 ```
 
