@@ -18,7 +18,7 @@ initForms()
 ```
 ## Example html for form fields.
 
-All form fields that need to be validated should have the data-val="true" attribute, and at least one other additional attribute to describe the validation type/error message for failure.
+All form fields that need to be validated should have the `data-val="true"` attribute, and at least one other additional attribute to describe the validation type/error message for failure.
 
 ### Required Field
 ```html
@@ -125,13 +125,13 @@ addRule('valMaxlength', function (field) {
 
 ### Async Forms
 
-to make a for ajax use use the data-ajax attribute.
+To make a form ajax use use the `data-ajax` attribute.
 
-if data-ajax is true or 'auto' then the library will look for the data-ajax-update and data-ajax-mode to decide the behavior.
+if `data-ajax` is true or 'auto' then the library will look for the `data-ajax-update` and `data-ajax-mode` to decide the behavior.
 
-the data-ajax-update method is a css selector pointing to an individual element this will be used as a reference point for the response to the form submission.
+the `data-ajax-update` method is a css selector pointing to an individual element this will be used as a reference point for the response to the form submission.
 
-the data-ajax-mode attribute determines what to do with the response to the submitted form in relation to the element referenced by the data-ajax-update attribute.
+the `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
 
 | Ajax Method                                             | Behavior                                                              |
 | ------------------------------------------------------  | --------------------------------------------------------------------  |
@@ -166,7 +166,7 @@ if you wish to redirect your form to a new page upon submission i would suggest 
 
 #### Manual Async Forms
 
-if you have a form you want to handle manually you can remove the data-ajax-mode and the data-ajax-update attribute and set the data-ajax property to 'manual' i.e.
+if you have a form you want to handle manually you can remove the `data-ajax-mode` and the `data-ajax-update` attribute and set the `data-ajax` property to 'manual' i.e.
 
 
 ```html
