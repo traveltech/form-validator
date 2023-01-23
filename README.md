@@ -18,6 +18,8 @@ initForms()
 ```
 ## Example html for form fields.
 
+All form fields that need to be validated should have the data-val="true" attribute, and at least one other additional attribute to describe the validation type/error message for failure.
+
 ### Required Field
 ```html
    <div>
@@ -38,6 +40,61 @@ initForms()
   </div>
 
 ```
+
+### Phone number
+
+```html
+  <div>
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" data-val="true" data-val-phone="this appears to be an invalid phone number">
+    <span data-valmsg-for="phone" data-valmsg-replace="true"></span>
+  </div>
+
+```
+
+### Regular Expression
+
+```html
+   <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" value="" data-val="true" data-val-regex-pattern="/^([^0-9]*)$/" data-val-regex="the name field shouldn't contain any numbers">
+      <span data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+
+```
+
+### Numeric field
+
+```html
+   <div>
+      <label for="number">Number</label>
+      <input id="number" name="number" type="number" value="" data-val="true" data-val-number="this field should contain numbers only">
+      <span data-valmsg-for="number" data-valmsg-replace="true"></span>
+    </div>
+
+```
+### Maxaximum length
+
+```html
+   <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" value="" data-val="true" data-val-regex-pattern="/^([^0-9]*)$/" data-val-max-length-max="50" data-val-max-length="this field shouldn't contain more than 50 characters">
+      <span data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+
+```
+
+### Minimum length
+
+```html
+   <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" value="" data-val="true" data-val-regex-pattern="/^([^0-9]*)$/" data-val-min-length-min="50" data-val-min-length="this field should contain at least 50 characters">
+      <span data-valmsg-for="name" data-valmsg-replace="true"></span>
+    </div>
+
+```
+
 
 ## Adding additional rules
 
