@@ -73,7 +73,7 @@ All form fields that need to be validated should have the `data-val="true"` attr
     </div>
 
 ```
-### Maxaximum length
+### Maximum length
 
 ```html
    <div>
