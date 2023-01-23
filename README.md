@@ -123,7 +123,7 @@ addRule('valMaxlength', function (field) {
 
 ```
 
-### Async Forms
+## Async Forms
 
 To make a form ajax use use the `data-ajax` attribute.
 
@@ -155,7 +155,7 @@ An example may look like this:
 
 The library will submit the form using the method specified against the form, and will expect an html partial as a response.
 
-#### Form redirection
+### Form redirection
 
 If you wish to redirect your form to a new page upon submission i would suggest using a non-ajax form, however if for whatever reason you are unable to do so, you may return a json response that will redirect to a new page, the json must be an exact match to the following example, the redirectTo property will be the url to which you wish to redirect the user.
 
@@ -166,7 +166,7 @@ If you wish to redirect your form to a new page upon submission i would suggest 
 
 ```
 
-#### Manual Async Forms
+### Manual Async Forms
 
 If you have a form you want to handle manually you can remove the `data-ajax-mode` and the `data-ajax-update` attribute and set the `data-ajax` property to 'manual' i.e.
 
