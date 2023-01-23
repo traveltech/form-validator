@@ -133,7 +133,7 @@ The `data-ajax-update` method is a css selector pointing to an individual elemen
 
 The `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
 
-| Ajax Method        | Behavior                                                              |
+| **Ajax Method**    | **Behavior**                                                          |
 | -----------------  | --------------------------------------------------------------------  |
 | Before             | Insert the response from the server before the element                |
 | After              | Insert the response from the server after the element                 |
