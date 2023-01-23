@@ -155,7 +155,7 @@ An example may look like this:
 
 The library will submit the form using the method specified against the form, and will expect an html partial as a response.
 
-#### form redirection
+#### Form redirection
 
 If you wish to redirect your form to a new page upon submission i would suggest using a non-ajax form, however if for whatever reason you are unable to do so, you may return a json response that will redirect to a new page, the json must be an exact match to the following example, the redirectTo property will be the url to which you wish to redirect the user.
 
