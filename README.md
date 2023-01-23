@@ -107,9 +107,9 @@ import { addRule } from '@chrisjwarnes/form-validator'
 
 ```
 
-the addRule function takes two arguments the first is the attribute for the validation, this is in dataset format i.e. for required validation an attribute of `data-val-required` will be added to the input therefore the first argument is `valRequired` as it would appear under the data set property for that input, see [Dataset Documentation](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) for more details.
+The `addRule` function takes two arguments the first is the attribute for the validation, this is in dataset format i.e. for required validation an attribute of `data-val-required` will be added to the input therefore the first argument is `'valRequired'` as it would appear under the data set property for that input, see [Dataset Documentation](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) for more details.
 
-the second argument of addRule is an anonymous function with the argument of a field and returning an object containing the async-validator rule details.
+The second argument of addRule is an anonymous function with the argument of a field and returning an object containing the `async-validator` rule details.
 
 ### Example rule
 ```javascript
@@ -127,11 +127,11 @@ addRule('valMaxlength', function (field) {
 
 To make a form ajax use use the `data-ajax` attribute.
 
-if `data-ajax` is true or 'auto' then the library will look for the `data-ajax-update` and `data-ajax-mode` to decide the behavior.
+If `data-ajax` is true or 'auto' then the library will look for the `data-ajax-update` and `data-ajax-mode` to decide the behavior.
 
-the `data-ajax-update` method is a css selector pointing to an individual element this will be used as a reference point for the response to the form submission.
+The `data-ajax-update` method is a css selector pointing to an individual element this will be used as a reference point for the response to the form submission.
 
-the `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
+The `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
 
 | Ajax Method                                             | Behavior                                                              |
 | ------------------------------------------------------  | --------------------------------------------------------------------  |
@@ -140,7 +140,7 @@ the `data-ajax-mode` attribute determines what to do with the response to the su
 | Replace-With                                            | replace the element with the response from the server                 |
 | Update (Default behaviour if attribute is not present)  | Update the contents of the element  with the response from the server |
 
-an example may look like this.
+An example may look like this:
 
 ```html
 <div id="form-container">
@@ -151,11 +151,11 @@ an example may look like this.
 
 ```
 
-the library will submit the form using the method specified against the form, and will expect an html partial as a response.
+The library will submit the form using the method specified against the form, and will expect an html partial as a response.
 
 #### form redirection
 
-if you wish to redirect your form to a new page upon submission i would suggest using a non-ajax form, however if for whatever reason you are unable to do so, you may return a json response that will redirect to a new page, the json must be an exact match to the following example, the redirectTo property will be the url to which you wish to redirect the user.
+If you wish to redirect your form to a new page upon submission i would suggest using a non-ajax form, however if for whatever reason you are unable to do so, you may return a json response that will redirect to a new page, the json must be an exact match to the following example, the redirectTo property will be the url to which you wish to redirect the user.
 
 ```json
 {
@@ -166,7 +166,7 @@ if you wish to redirect your form to a new page upon submission i would suggest 
 
 #### Manual Async Forms
 
-if you have a form you want to handle manually you can remove the `data-ajax-mode` and the `data-ajax-update` attribute and set the `data-ajax` property to 'manual' i.e.
+If you have a form you want to handle manually you can remove the `data-ajax-mode` and the `data-ajax-update` attribute and set the `data-ajax` property to 'manual' i.e.
 
 
 ```html
@@ -177,7 +177,7 @@ if you have a form you want to handle manually you can remove the `data-ajax-mod
 </div>
 
 ```
-this form can then be handled via javascript as follows.
+This form can then be handled via javascript as follows.
 
 ```javascript
 const form = document.querySelector('#my-form')
