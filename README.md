@@ -133,12 +133,14 @@ The `data-ajax-update` method is a css selector pointing to an individual elemen
 
 The `data-ajax-mode` attribute determines what to do with the response to the submitted form in relation to the element referenced by the `data-ajax-update` attribute.
 
-| Ajax Method                                             | Behavior                                                              |
-| ------------------------------------------------------  | --------------------------------------------------------------------  |
-| Before                                                  | Insert the response from the server before the element                |
-| After                                                   | Insert the response from the server after the element                 |
-| Replace-With                                            | replace the element with the response from the server                 |
-| Update ==Default behaviour if attribute is not present==  | Update the contents of the element  with the response from the server |
+| Ajax Method        | Behavior                                                              |
+| -----------------  | --------------------------------------------------------------------  |
+| Before             | Insert the response from the server before the element                |
+| After              | Insert the response from the server after the element                 |
+| Replace-With       | replace the element with the response from the server                 |
+| Update             | Update the contents of the element  with the response from the server |
+
+if there is no `data-ajax-mode` attribute the default is `Update`.
 
 An example may look like this:
 
