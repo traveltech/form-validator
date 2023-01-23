@@ -138,7 +138,7 @@ The `data-ajax-mode` attribute determines what to do with the response to the su
 | Before                                                  | Insert the response from the server before the element                |
 | After                                                   | Insert the response from the server after the element                 |
 | Replace-With                                            | replace the element with the response from the server                 |
-| Update (Default behaviour if attribute is not present)  | Update the contents of the element  with the response from the server |
+| Update ==Default behaviour if attribute is not present==  | Update the contents of the element  with the response from the server |
 
 An example may look like this:
 
