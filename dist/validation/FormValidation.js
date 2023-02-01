@@ -19,10 +19,15 @@ var messageErrorClass = 'field-validation-error';
 var updatedEvent = 'form-updated';
 exports.updatedEvent = updatedEvent;
 
-var addRule = function addRule(attribute, rule) {
+var addRule = function addRule(attribute, rule, fireOnlyOnSubmit) {
+  if (fireOnlyOnSubmit === void 0) {
+    fireOnlyOnSubmit = false;
+  }
+
   ruleDefinitions.push({
     attribute,
-    rule
+    rule,
+    fireOnlyOnSubmit
   });
   document.dispatchEvent(new CustomEvent(updatedEvent));
 };
@@ -89,6 +94,7 @@ class FormValidation {
 
   initRules() {
     var definition = {};
+    var blurDefinition = {};
 
     for (var field of this.fields) {
       var rules = this.setupRules(field);
@@ -96,8 +102,15 @@ class FormValidation {
       if (rules) {
         definition[field.name] = rules;
       }
+
+      var blurRules = this.setupBlurRules(field);
+
+      if (blurRules) {
+        blurDefinition[field.name] = rules;
+      }
     }
 
+    this.blurValidator = new _asyncValidator.default(blurDefinition);
     this.validator = new _asyncValidator.default(definition);
   }
 
@@ -105,6 +118,24 @@ class FormValidation {
     var rules = [];
 
     for (var rule of ruleDefinitions) {
+      if (field.dataset[rule.attribute]) {
+        var newRule = rule.rule(field);
+
+        if (newRule) {
+          rules.push(newRule);
+        }
+      }
+    }
+
+    if (rules.length > 0 & field.name.length > 0) {
+      return rules.length > 1 ? rules : rules[0];
+    }
+  }
+
+  setupBlurRules(field) {
+    var rules = [];
+
+    for (var rule of ruleDefinitions.filter(x => x.fireOnlyOnSubmit == false)) {
       if (field.dataset[rule.attribute]) {
         var newRule = rule.rule(field);
 
@@ -254,7 +285,7 @@ class FormValidation {
 
   validateField(field) {
     var formData = this.formToObject();
-    return this.validator.validate(formData, {
+    return this.blurValidator.validate(formData, {
       firstFields: true
     }).then(() => {
       this.clearErrors(field);

@@ -14,8 +14,8 @@ const messageErrorClass = 'field-validation-error'
 
 export const updatedEvent = 'form-updated'
 
-export const addRule = function (attribute, rule) {
-  ruleDefinitions.push({ attribute, rule })
+export const addRule = function (attribute, rule, fireOnlyOnSubmit = false) {
+  ruleDefinitions.push({ attribute, rule, fireOnlyOnSubmit })
   document.dispatchEvent(new CustomEvent(updatedEvent))
 }
 
@@ -84,19 +84,41 @@ export class FormValidation {
 
   initRules () {
     const definition = {}
+    const blurDefinition = {}
     for (const field of this.fields) {
       const rules = this.setupRules(field)
       if (rules) {
         definition[field.name] = rules
       }
-    }
 
+      const blurRules = this.setupBlurRules(field)
+      if (blurRules) {
+        blurDefinition[field.name] = rules
+      }
+    }
+    this.blurValidator = new Schema(blurDefinition)
     this.validator = new Schema(definition)
   }
 
   setupRules (field) {
     const rules = []
     for (const rule of ruleDefinitions) {
+      if (field.dataset[rule.attribute]) {
+        const newRule = rule.rule(field)
+        if (newRule) {
+          rules.push(newRule)
+        }
+      }
+    }
+
+    if (rules.length > 0 & field.name.length > 0) {
+      return rules.length > 1 ? rules : rules[0]
+    }
+  }
+
+  setupBlurRules (field) {
+    const rules = []
+    for (const rule of ruleDefinitions.filter(x => x.fireOnlyOnSubmit == false)) {
       if (field.dataset[rule.attribute]) {
         const newRule = rule.rule(field)
         if (newRule) {
@@ -230,7 +252,7 @@ export class FormValidation {
 
   validateField (field) {
     const formData = this.formToObject()
-    return this.validator.validate(formData, { firstFields: true }).then(() => {
+    return this.blurValidator.validate(formData, { firstFields: true }).then(() => {
       this.clearErrors(field)
       return true
     }).catch(({ errors, fields }) => {
