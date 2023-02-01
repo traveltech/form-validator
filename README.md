@@ -107,19 +107,39 @@ import { addRule } from '@chrisjwarnes/form-validator'
 
 ```
 
-The `addRule` function takes two arguments the first is the attribute for the validation, this is in dataset format i.e. for required validation an attribute of `data-val-required` will be added to the input therefore the first argument is `'valRequired'` as it would appear under the data set property for that input, see [Dataset Documentation](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) for more details.
+The `addRule` function takes three arguments the first is the attribute for the validation, this is in dataset format i.e. for required validation an attribute of `data-val-required` will be added to the input therefore the first argument is `'valRequired'` as it would appear under the data set property for that input, see [Dataset Documentation](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) for more details.
 
 The second argument of addRule is an anonymous function with the argument of a field and returning an object containing the `async-validator` rule details.
 
-### Example rule
+the third argument is an optional boolean field (default: false) which specifys whether or not the rule should only be run on form submission (for example if the rule carrys out ajax requests to the server e.g. recaptcha?) other rules will be fired on blur/input events of the field.
+
+### Example rules
 ```javascript
-addRule('valMaxlength', function (field) {
+  addRule('valMaxlength', function (field) {
     return {
       type: 'string',
       max: parseInt(field.dataset.valMaxlengthMax),
       message: field.dataset.valMaxlength
     }
   })
+
+  addRule('valRecaptcha', function (field) {
+    return {
+      type: 'string',
+      asyncValidator: (rule, value) => {
+        return new Promise((resolve, reject) => {
+          if (!window.grecaptcha) {
+            reject(new Error('grecaptcha script is missing.'))
+          }
+          window.grecaptcha.execute(field.dataset.valRecaptchaKey, { action: field.dataset.valRecaptchaAction }).then(function (token) {
+            field.value = token
+            resolve()
+          })
+        })
+      },
+      message: field.dataset.valRecaptcha
+    }
+  }, true)
 
 ```
 
