@@ -43,6 +43,7 @@ class FormValidation {
   init() {
     this.fields = this.form.querySelectorAll('[data-val="true"]');
     this.summary = this.form.querySelector('[data-valmsg-summary="true"]');
+    this.nonce = Math.random().toString(36).slice(2);
     this.initRules();
   }
 
@@ -235,7 +236,7 @@ class FormValidation {
       var label = this.form.querySelector("[data-valmsg-for=\"" + field.field + "\"]");
 
       if (label && label.dataset.valmsgReplace === 'true') {
-        var valId = field.field + "-val";
+        var valId = field.field + "-val-" + this.nonce;
         label.id = valId;
         elem.attributes.add('aria-describedby', valId);
         label.innerText = field.message;

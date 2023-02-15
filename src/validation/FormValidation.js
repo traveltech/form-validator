@@ -28,6 +28,7 @@ export class FormValidation {
   init () {
     this.fields = this.form.querySelectorAll('[data-val="true"]')
     this.summary = this.form.querySelector('[data-valmsg-summary="true"]')
+    this.nonce = Math.random().toString(36).slice(2)
     this.initRules()
   }
 
@@ -212,7 +213,7 @@ export class FormValidation {
       const label = this.form.querySelector(`[data-valmsg-for="${field.field}"]`)
 
       if (label && label.dataset.valmsgReplace === 'true') {
-        const valId = `${field.field}-val`
+        const valId = `${field.field}-val-${this.nonce}`
         label.id = valId
         elem.attributes.add('aria-describedby', valId)
         label.innerText = field.message
