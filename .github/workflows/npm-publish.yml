@@ -4,13 +4,14 @@
 name: Node.js Package
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: [Node.js CI]
+    types:
+      - completed
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "startsWith(github.event.head_commit.message, '[RELEASE]')"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
