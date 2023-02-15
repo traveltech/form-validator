@@ -1,6 +1,8 @@
 # form-validator
 replacement for jquery-validate / jquery-validate-unobtrusive, aimed at dot net projects to remove jquery dependency
 
+[![Node.js CI](https://github.com/chrisjwarnes/form-validator/actions/workflows/node.js.yml/badge.svg)](https://github.com/chrisjwarnes/form-validator/actions/workflows/node.js.yml)
+
 ## Installation (npm)
 ```
 npm install '@chrisjwarnes/form-validator'
