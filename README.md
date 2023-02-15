@@ -18,6 +18,18 @@ setupValidation()
 initForms()
 
 ```
+
+## ES6 modules
+
+to use ES6 modules use the following syntax, you will need to do your own transcribing to meet your browser requirements.
+
+```javascript
+import { initForms, setupValidation } from '@chrisjwarnes/form-validator/src' 
+setupValidation()
+initForms()
+
+```
+
 ## Example html for form fields.
 
 All form fields that need to be validated should have the `data-val="true"` attribute, and at least one other additional attribute to describe the validation type/error message for failure.
