@@ -137,7 +137,16 @@ export class FormValidation {
       const field = fields[key]
       this.displayError(field[0])
     }
+    this.focusFirst()
     this.validationSummary(errors)
+  }
+
+  focusFirst() {
+    const error = this.form.querySelector(`.${inputErrorClass}`)
+
+    if (error) {
+      error.focus()
+    }
   }
 
   handleFieldError (errors, fields, field) {
@@ -153,6 +162,7 @@ export class FormValidation {
     const errors = this.form.querySelectorAll(`.${inputErrorClass}`)
     for (const error of errors) {
       error.classList.remove(inputErrorClass)
+      error.removeAttribute('aria-describedby')
     }
     if (this.summary) {
       if (!this.summary.classList.contains(summaryValidClass)) {
@@ -202,6 +212,9 @@ export class FormValidation {
       const label = this.form.querySelector(`[data-valmsg-for="${field.field}"]`)
 
       if (label && label.dataset.valmsgReplace === 'true') {
+        const valId = `${field.field}-val`
+        label.id = valId
+        elem.attributes.add('aria-describedby', valId)
         label.innerText = field.message
         label.classList.remove(messageValidClass)
         label.classList.add(messageErrorClass)
