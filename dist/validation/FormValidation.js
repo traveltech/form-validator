@@ -238,7 +238,7 @@ class FormValidation {
       if (label && label.dataset.valmsgReplace === 'true') {
         var valId = field.field + "-val-" + this.nonce;
         label.id = valId;
-        elem.attributes.add('aria-describedby', valId);
+        elem.setAttribute('aria-describedby', valId);
         label.innerText = field.message;
         label.classList.remove(messageValidClass);
         label.classList.add(messageErrorClass);
