@@ -156,7 +156,16 @@ class FormValidation {
       this.displayError(field[0]);
     }
 
+    this.focusFirst();
     this.validationSummary(errors);
+  }
+
+  focusFirst() {
+    var error = this.form.querySelector("." + inputErrorClass);
+
+    if (error) {
+      error.focus();
+    }
   }
 
   handleFieldError(errors, fields, field) {
@@ -173,6 +182,7 @@ class FormValidation {
 
     for (var error of errors) {
       error.classList.remove(inputErrorClass);
+      error.removeAttribute('aria-describedby');
     }
 
     if (this.summary) {
@@ -225,6 +235,9 @@ class FormValidation {
       var label = this.form.querySelector("[data-valmsg-for=\"" + field.field + "\"]");
 
       if (label && label.dataset.valmsgReplace === 'true') {
+        var valId = field.field + "-val";
+        label.id = valId;
+        elem.attributes.add('aria-describedby', valId);
         label.innerText = field.message;
         label.classList.remove(messageValidClass);
         label.classList.add(messageErrorClass);
