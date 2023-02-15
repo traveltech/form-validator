@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-
+          
+      - run: git config --global user.name 'chrisjwarnes'
+      - run: git config --global user.email 'chriswarnes@gmail.com'
       - run: npm version patch -m "[RELEASE] %s"
       - run: git push
