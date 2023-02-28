@@ -41,8 +41,7 @@ export class FormValidation {
           this.validateForm().then(() => {
             this.form.dataset.valid = true
             this.form.submit()
-          }).catch(function (error) {
-            console.error('validation error', error)
+          }).catch(function (errors, fields) {
             e.preventDefault()
           })
         }
@@ -56,7 +55,6 @@ export class FormValidation {
             this.form.dataset.valid = true
             submitAjaxForm(this.form)
           }).catch(function (errors, fields) {
-            console.log('validation failed with the following errors and fields:', errors, fields)
             e.preventDefault()
           })
         }

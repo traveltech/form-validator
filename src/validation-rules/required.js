@@ -26,7 +26,10 @@ export default function () {
       required: true,
       message: field.dataset.valRequired,
       transform(value) {
-        return value.trim()
+        if (value && value.trim) {
+          return value.trim()
+        }
+        return value
       }
     }
   })
