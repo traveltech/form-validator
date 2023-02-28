@@ -55,6 +55,7 @@ export class FormValidation {
             this.form.dataset.valid = true
             submitAjaxForm(this.form)
           }).catch(function (errors, fields) {
+            console.log('validation failed with the following errors and fields:', errors, fields)
             e.preventDefault()
           })
         }
