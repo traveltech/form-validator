@@ -41,7 +41,8 @@ export class FormValidation {
           this.validateForm().then(() => {
             this.form.dataset.valid = true
             this.form.submit()
-          }).catch(function (errors, fields) {
+          }).catch(function (error) {
+            console.error('validation error', error)
             e.preventDefault()
           })
         }
