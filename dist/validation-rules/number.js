@@ -12,7 +12,11 @@ function _default() {
       message: field.dataset.valNumber,
 
       transform(value) {
-        return Number(value.trim());
+        if (value && value.trim) {
+          return Number(value.trim());
+        }
+
+        return value;
       }
 
     };

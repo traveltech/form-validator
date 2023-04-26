@@ -16,9 +16,7 @@ export default function () {
           type: 'boolean',
           required: true,
           message: field.dataset.valRequired,
-          transform (value) {
-            return field.checked
-          }
+          validator: (rule, value) => field.checked
         }
       }
     }
