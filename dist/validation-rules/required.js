@@ -8,16 +8,27 @@ var _FormValidation = require("../validation/FormValidation.js");
 function _default() {
   (0, _FormValidation.addRule)('valRequired', function (field) {
     if (field.type === 'checkbox') {
-      return {
-        type: 'boolean',
-        required: true,
-        message: field.dataset.valRequired,
+      var fields = document.querySelectorAll("[name=\"" + field.name + "\"]");
 
-        transform(value) {
-          return field.checked;
-        }
+      if (fields.length > 1) {
+        return {
+          type: 'boolean',
+          required: true,
+          message: field.dataset.valRequired,
+          validator: (rule, value) => [...fields].filter(x => x.checked).length > 0
+        };
+      } else {
+        return {
+          type: 'boolean',
+          required: true,
+          message: field.dataset.valRequired,
 
-      };
+          transform(value) {
+            return field.checked;
+          }
+
+        };
+      }
     }
 
     if (field.type === 'file') {
@@ -35,7 +46,11 @@ function _default() {
       message: field.dataset.valRequired,
 
       transform(value) {
-        return value.trim();
+        if (value && value.trim) {
+          return value.trim();
+        }
+
+        return value;
       }
 
     };

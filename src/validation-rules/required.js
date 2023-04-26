@@ -2,12 +2,23 @@ import { addRule } from '../validation/FormValidation.js'
 export default function () {
   addRule('valRequired', function (field) {
     if (field.type === 'checkbox') {
-      return {
-        type: 'boolean',
-        required: true,
-        message: field.dataset.valRequired,
-        transform (value) {
-          return field.checked
+      const fields = document.querySelectorAll(`[name="${field.name}"]`)
+
+      if (fields.length > 1) {
+        return {
+          type: 'boolean',
+          required: true,
+          message: field.dataset.valRequired,
+          validator: (rule, value) => [...fields].filter(x => x.checked).length > 0
+        }
+      } else {
+        return {
+          type: 'boolean',
+          required: true,
+          message: field.dataset.valRequired,
+          transform (value) {
+            return field.checked
+          }
         }
       }
     }
