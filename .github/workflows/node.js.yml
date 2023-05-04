@@ -48,6 +48,6 @@ jobs:
       - run: npm run build --if-present
       - run: git config --global user.name 'chrisjwarnes'
       - run: git config --global user.email 'chriswarnes@gmail.com'
-      - run: git add -A && git commit -m "Build - %s"
+      - run: git add -A && git commit -m "Build"
       - run: npm version patch -m "[RELEASE] %s"
       - run: git push
