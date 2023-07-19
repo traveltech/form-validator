@@ -65,10 +65,23 @@ export const submitAjaxForm = function (form) {
     }
   }
 
+  const isJsonResponse = function (response) {
+
+    if (response.headers) {
+      const contentType = response.headers.get('Content-Type')
+
+      if (contentType && contentType.startsWith('application/json')) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   let responseJson = false
   return fetch(form.action, fetchOptions)
     .then(response =>  {
-      if (response.headers.get('Content-Type').startsWith('application/json')) {
+      if (isJsonResponse(response)) {
         responseJson = true
         return response.json()
       }
