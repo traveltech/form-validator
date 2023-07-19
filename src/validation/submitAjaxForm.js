@@ -45,6 +45,17 @@ const redirect = function (responseData) {
   }
 }
 
+const isJsonResponse = function (response) {
+  if (response.headers) {
+    const contentType = response.headers.get('Content-Type')
+    if (contentType && contentType.startsWith('application/json')) {
+      return true
+    }
+  }
+
+  return false
+}
+
 export const submitAjaxForm = function (form) {
   const submit = form.querySelector('[type="submit"]')
   if (submit != null) {
@@ -63,19 +74,6 @@ export const submitAjaxForm = function (form) {
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
-  }
-
-  const isJsonResponse = function (response) {
-
-    if (response.headers) {
-      const contentType = response.headers.get('Content-Type')
-
-      if (contentType && contentType.startsWith('application/json')) {
-        return true
-      }
-    }
-
-    return false
   }
 
   let responseJson = false

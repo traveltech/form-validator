@@ -59,6 +59,18 @@ var redirect = function redirect(responseData) {
   }
 };
 
+var isJsonResponse = function isJsonResponse(response) {
+  if (response.headers) {
+    var contentType = response.headers.get('Content-Type');
+
+    if (contentType && contentType.startsWith('application/json')) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 var submitAjaxForm = function submitAjaxForm(form) {
   var submit = form.querySelector('[type="submit"]');
 
@@ -78,19 +90,6 @@ var submitAjaxForm = function submitAjaxForm(form) {
       'X-Requested-With': 'XMLHttpRequest'
     }
   };
-
-  var isJsonResponse = function isJsonResponse(response) {
-    if (response.headers) {
-      var contentType = response.headers.get('Content-Type');
-
-      if (contentType && contentType.startsWith('application/json')) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
   var responseJson = false;
   return fetch(form.action, fetchOptions).then(response => {
     if (isJsonResponse(response)) {
