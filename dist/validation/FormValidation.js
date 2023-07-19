@@ -52,6 +52,10 @@ class FormValidation {
 
     if (!this.form.dataset.ajax) {
       this.form.addEventListener('submit', e => {
+        if (e.submitter) {
+          e.submitter.disabled = true;
+        }
+
         if (!this.form.dataset.valid) {
           e.preventDefault();
           this.validateForm().then(() => {
@@ -59,11 +63,19 @@ class FormValidation {
             this.form.submit();
           }).catch(function (errors, fields) {
             e.preventDefault();
+
+            if (e.submitter) {
+              e.submitter.disabled = false;
+            }
           });
         }
       });
     } else if (this.form.dataset.ajax === 'auto' || this.form.dataset.ajax === 'true') {
       this.form.addEventListener('submit', e => {
+        if (e.submitter) {
+          e.submitter.disabled = true;
+        }
+
         if (!this.form.dataset.valid) {
           e.preventDefault();
           this.validateForm().then(() => {
@@ -71,6 +83,10 @@ class FormValidation {
             (0, _submitAjaxForm.submitAjaxForm)(this.form);
           }).catch(function (errors, fields) {
             e.preventDefault();
+
+            if (e.submitter) {
+              e.submitter.disabled = false;
+            }
           });
         }
       });
