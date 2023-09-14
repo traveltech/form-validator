@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.setupValidation = void 0;
+exports.setupValidation = exports.setupKenticoValidation = void 0;
 
 var _init = require("./validation/init.js");
 
@@ -12,6 +12,8 @@ var _FormValidation = require("./validation/FormValidation.js");
 exports.addRule = _FormValidation.addRule;
 
 var _required = _interopRequireDefault(require("./validation-rules/required.js"));
+
+var _kenticoRequired = _interopRequireDefault(require("./validation-rules/kentico-required.js"));
 
 var _email = _interopRequireDefault(require("./validation-rules/email.js"));
 
@@ -39,3 +41,15 @@ var setupValidation = function setupValidation() {
 };
 
 exports.setupValidation = setupValidation;
+
+var setupKenticoValidation = function setupKenticoValidation() {
+  (0, _kenticoRequired.default)();
+  (0, _email.default)();
+  (0, _maxLength.default)();
+  (0, _minLength.default)();
+  (0, _number.default)();
+  (0, _phone.default)();
+  (0, _regex.default)();
+};
+
+exports.setupKenticoValidation = setupKenticoValidation;

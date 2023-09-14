@@ -3,6 +3,7 @@ import { addRule } from './validation/FormValidation.js'
 
 // rules
 import requiredRule from './validation-rules/required.js'
+import kenticoRequiredRule from './validation-rules/kentico-required.js'
 import emailRule from './validation-rules/email.js'
 import maxlengthRule from './validation-rules/maxLength.js'
 import minlengthRule from './validation-rules/minLength.js'
@@ -20,8 +21,19 @@ const setupValidation = function() {
   regexRule()
 }
 
+const setupKenticoValidation = function () {
+  kenticoRequiredRule()
+  emailRule()
+  maxlengthRule()
+  minlengthRule()
+  numberRule()
+  phoneRule()
+  regexRule()
+}
+
 export {
   initForms,
   setupValidation,
+  setupKenticoValidation,
   addRule
 }
