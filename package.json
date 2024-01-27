@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/chrisjwarnes/form-validator#readme",
   "dependencies": {
-    "async-validator": "^3.5.1"
+    "async-validator": "^4.2.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
