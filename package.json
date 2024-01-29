@@ -3,6 +3,7 @@
   "version": "1.0.52",
   "description": "es6 replacement for jquery-unobtrusive-validation",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "babel src -d dist"
   },
