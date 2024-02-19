@@ -82,6 +82,10 @@ export class FormValidation {
 
     this.form.addEventListener('input', (e) => {
       try {
+        if (e.target.dataset.valOnInput === 'false') {
+          this.clearErrors(e.target);
+          return;
+        }
         this.validateField(e.target)
       } catch (err) {
       }

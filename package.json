@@ -1,6 +1,6 @@
 {
-  "name": "@chrisjwarnes/form-validator",
-  "version": "1.0.55",
+  "name": "@traveltech/form-validator",
+  "version": "1.0.0",
   "description": "es6 replacement for jquery-unobtrusive-validation",
   "main": "index.js",
   "scripts": {
@@ -8,19 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chrisjwarnes/form-validator.git"
+    "url": "git+https://github.com/traveltech/form-validator.git"
   },
   "keywords": [
     "form",
     "validation",
     "no-jquery"
   ],
-  "author": "chrisjwarnes",
+  "author": "nichines",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chrisjwarnes/form-validator/issues"
+    "url": "https://github.com/traveltech/form-validator/issues"
   },
-  "homepage": "https://github.com/chrisjwarnes/form-validator#readme",
+  "homepage": "https://github.com/traveltech/form-validator#readme",
   "dependencies": {
     "async-validator": "^4.2.5"
   },
