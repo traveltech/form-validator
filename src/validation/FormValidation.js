@@ -73,24 +73,32 @@ export class FormValidation {
       })
     }
 
-    if (this.form.dataset.ajax !== 'manual') {  
       this.form.addEventListener('blur', (e) => {
         try {
-          this.validateField(e.target)
+          if (this.form.dataset.ajax !== 'manual')
+            thiis.clearErrors(e.target);
+          else
+            this.validateField(e.target)
         } catch (err) {
         }
       })
 
       this.form.addEventListener('input', (e) => {
         try {
-          this.validateField(e.target)
+          if (this.form.dataset.ajax !== 'manual')
+            thiis.clearErrors(e.target);
+          else
+            this.validateField(e.target)
         } catch (err) {
         }
       })
 
       this.form.addEventListener('change', (e) => {
         try {
-          this.validateField(e.target)
+          if (this.form.dataset.ajax !== 'manual')
+            thiis.clearErrors(e.target);
+          else
+            this.validateField(e.target)
         } catch (err) {
         }
       })
