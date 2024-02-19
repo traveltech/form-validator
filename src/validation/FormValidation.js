@@ -73,36 +73,35 @@ export class FormValidation {
       })
     }
 
-      this.form.addEventListener('blur', (e) => {
-        try {
-          if (this.form.dataset.ajax === 'manual')
-            this.clearErrors(e.target)
-          else
-            this.validateField(e.target)
-        } catch (err) {
-        }
-      })
+    this.form.addEventListener('blur', (e) => {
+      try {
+        if (this.form.dataset.ajax === 'manual')
+          this.clearErrors(e.target)
+        else
+          this.validateField(e.target)
+      } catch (err) {
+      }
+    })
 
-      this.form.addEventListener('input', (e) => {
-        try {
-          if (this.form.dataset.ajax === 'manual')
-            this.clearErrors(e.target)
-          else
-            this.validateField(e.target)
-        } catch (err) {
-        }
-      })
+    this.form.addEventListener('input', (e) => {
+      try {
+        if (this.form.dataset.ajax === 'manual')
+          this.clearErrors(e.target)
+        else
+          this.validateField(e.target)
+      } catch (err) {
+      }
+    })
 
-      this.form.addEventListener('change', (e) => {
-        try {
-          if (this.form.dataset.ajax === 'manual')
-            this.clearErrors(e.target)
-          else
-            this.validateField(e.target)
-        } catch (err) {
-        }
-      })
-    }
+    this.form.addEventListener('change', (e) => {
+      try {
+        if (this.form.dataset.ajax === 'manual')
+          this.clearErrors(e.target)
+        else
+          this.validateField(e.target)
+      } catch (err) {
+      }
+    })
   }
 
   initRules () {
