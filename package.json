@@ -1,6 +1,6 @@
 {
   "name": "@traveltech/form-validator",
-  "version": "1.0.0-rc2",
+  "version": "1.0.0-rc3",
   "description": "es6 replacement for jquery-unobtrusive-validation",
   "main": "index.js",
   "scripts": {
