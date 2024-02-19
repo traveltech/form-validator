@@ -73,30 +73,28 @@ export class FormValidation {
       })
     }
 
-    this.form.addEventListener('blur', (e) => {
-      try {
-        this.validateField(e.target)
-      } catch (err) {
-      }
-    })
-
-    this.form.addEventListener('input', (e) => {
-      try {
-        if (e.target.dataset.valOnInput === 'false') {
-          this.clearErrors(e.target);
-          return;
+    if (this.form.dataset.ajax !== 'manual') {  
+      this.form.addEventListener('blur', (e) => {
+        try {
+          this.validateField(e.target)
+        } catch (err) {
         }
-        this.validateField(e.target)
-      } catch (err) {
-      }
-    })
+      })
 
-    this.form.addEventListener('change', (e) => {
-      try {
-        this.validateField(e.target)
-      } catch (err) {
-      }
-    })
+      this.form.addEventListener('input', (e) => {
+        try {
+          this.validateField(e.target)
+        } catch (err) {
+        }
+      })
+
+      this.form.addEventListener('change', (e) => {
+        try {
+          this.validateField(e.target)
+        } catch (err) {
+        }
+      })
+    }
   }
 
   initRules () {
