@@ -76,7 +76,7 @@ export class FormValidation {
       this.form.addEventListener('blur', (e) => {
         try {
           if (this.form.dataset.ajax !== 'manual')
-            thiis.clearErrors(e.target);
+            thiis.clearErrors(e.target)
           else
             this.validateField(e.target)
         } catch (err) {
@@ -86,7 +86,7 @@ export class FormValidation {
       this.form.addEventListener('input', (e) => {
         try {
           if (this.form.dataset.ajax !== 'manual')
-            thiis.clearErrors(e.target);
+            thiis.clearErrors(e.target)
           else
             this.validateField(e.target)
         } catch (err) {
@@ -96,7 +96,7 @@ export class FormValidation {
       this.form.addEventListener('change', (e) => {
         try {
           if (this.form.dataset.ajax !== 'manual')
-            thiis.clearErrors(e.target);
+            thiis.clearErrors(e.target)
           else
             this.validateField(e.target)
         } catch (err) {
