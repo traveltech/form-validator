@@ -31,7 +31,8 @@ export class FormValidation {
 
     for (let i = 0; i < controls.length; i++) {
       if (controls[i].getAttribute('data-val') === 'true') {
-      this.fields.push(controls[i]);
+        this.fields.push(controls[i]);
+      }
     }
     // this.fields = this.form.querySelectorAll('[data-val="true"]')
     this.summary = this.form.querySelector('[data-valmsg-summary="true"]')
