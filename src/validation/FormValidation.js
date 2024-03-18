@@ -26,15 +26,7 @@ export class FormValidation {
   }
 
   init () {
-    const controls = this.form.elements;
-    this.fields = [];
-
-    for (let i = 0; i < controls.length; i++) {
-      if (controls[i].getAttribute('data-val') === 'true') {
-        this.fields.push(controls[i]);
-      }
-    }
-    // this.fields = this.form.querySelectorAll('[data-val="true"]')
+    this.fields = this.form.querySelectorAll('[data-val="true"]')
     this.summary = this.form.querySelector('[data-valmsg-summary="true"]')
     this.nonce = Math.random().toString(36).slice(2)
     this.initRules()
